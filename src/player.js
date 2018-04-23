@@ -2,11 +2,9 @@ class Player {
     constructor() {
         this.sprite = createSprite(500, 500);
 
-        const spriteImage = loadImage("Images/Happy.png", function() {
-            spriteImage.resize(100, 0);
-        });
-
-        this.sprite.addImage(spriteImage);
+        this.sprite.addImage(loadImage("Images/Happy.png", function(image) {
+            image.resize(100, 0);
+        }));
     }
 
     update() {
