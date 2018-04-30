@@ -1,30 +1,31 @@
 class Player {
-    constructor() {
+    constructor(controls) {
         this.sprite = createSprite(500, 500);
-
         this.sprite.addImage(loadImage("Images/Happy.png", image => image.resize(100, 0)));
 
         this.speed = 5;
+
+        this.controls = controls;
     }
 
     update() {
-        if (keyDown("W")) {
+        if (keyDown(this.controls.up)) {
             this.move("y", -1);
         }
 
-        if (keyDown("S")) {
+        if (keyDown(this.controls.down)) {
             this.move("y");
         }
 
-        if (keyDown("A")) {
+        if (keyDown(this.controls.left)) {
             this.move("x", -1);
         }
 
-        if (keyDown("D")) {
+        if (keyDown(this.controls.right)) {
             this.move("x");
         }
 
-        if (keyDown("Q")) {
+        if (keyDown(this.controls.shoot)) {
             // shoot
         }
     }
