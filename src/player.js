@@ -3,6 +3,8 @@ class Player {
         this.sprite = createSprite(500, 500);
         this.sprite.addImage(loadImage(`Images/${emoji}.png`, image => image.resize(100, 0)));
 
+        this.sprite.setCollider("circle", 0, 0, 50);
+
         this.speed = 5;
 
         this.controls = controls;
