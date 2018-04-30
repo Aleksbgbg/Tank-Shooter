@@ -14,6 +14,7 @@ function preload() {
         right: "D",
         shoot: "Q"
     }));
+
     config.players.push(new Player("Neutral", {
         up: "I",
         down: "K",
@@ -21,6 +22,7 @@ function preload() {
         right: "L",
         shoot: "U"
     }));
+
     config.players.push(new Player("Smiley", {
         up: 38,
         down: 40,
