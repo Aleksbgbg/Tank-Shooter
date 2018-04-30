@@ -1,13 +1,21 @@
 class Player {
     constructor(emoji, controls) {
-        this.sprite = createSprite(500, 500);
-        this.sprite.addImage(loadImage(`Images/${emoji}.png`, image => image.resize(100, 0)));
+        this._sprite = createSprite(500, 500);
+        this._sprite.addImage(loadImage(`Images/${emoji}.png`, image => image.resize(100, 0)));
 
-        this.sprite.setCollider("circle", 0, 0, 50);
+        this._sprite.setCollider("circle", 0, 0, 50);
 
         this.speed = 5;
 
         this.controls = controls;
+    }
+
+    get sprite() {
+        return this._sprite;
+    }
+
+    set sprite(value) {
+        this._sprite = value;
     }
 
     update() {
@@ -33,10 +41,10 @@ class Player {
     }
 
     draw() {
-        drawSprite(this.sprite);
+        drawSprite(this._sprite);
     }
 
     move(coordinate, multiplier = 1) {
-        this.sprite.position[coordinate] += this.speed * multiplier;
+        this._sprite.position[coordinate] += this.speed * multiplier;
     }
 }
