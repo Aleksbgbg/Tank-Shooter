@@ -1,9 +1,9 @@
-class Player {
+class Player extends SpriteEntity {
     constructor(emoji, controls) {
-        this._sprite = createSprite(500, 500);
-        this._sprite.addImage(loadImage(`Images/${emoji}.png`, image => image.resize(100, 0)));
-
-        this._sprite.setCollider("circle", 0, 0, 50);
+        super({
+            x: 500,
+            y: 500
+        }, emoji, 100);
 
         this.speed = 5;
 
@@ -38,10 +38,6 @@ class Player {
         if (keyDown(this.controls.shoot)) {
             // shoot
         }
-    }
-
-    draw() {
-        drawSprite(this._sprite);
     }
 
     move(coordinate, multiplier = 1) {
