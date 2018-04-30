@@ -1,7 +1,7 @@
 class Player {
-    constructor(controls) {
+    constructor(emoji, controls) {
         this.sprite = createSprite(500, 500);
-        this.sprite.addImage(loadImage("Images/Happy.png", image => image.resize(100, 0)));
+        this.sprite.addImage(loadImage(`Images/${emoji}.png`, image => image.resize(100, 0)));
 
         this.speed = 5;
 

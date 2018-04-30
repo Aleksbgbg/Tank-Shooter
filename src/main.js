@@ -7,21 +7,21 @@ const config = {
 };
 
 function preload() {
-    config.players.push(new Player({
+    config.players.push(new Player("Happy", {
         up: "W",
         down: "S",
         left: "A",
         right: "D",
         shoot: "Q"
     }));
-    config.players.push(new Player({
+    config.players.push(new Player("Neutral", {
         up: "I",
         down: "K",
         left: "J",
         right: "L",
         shoot: "U"
     }));
-    config.players.push(new Player({
+    config.players.push(new Player("Smiley", {
         up: 38,
         down: 40,
         left: 37,
