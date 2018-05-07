@@ -8,6 +8,8 @@ class Player extends SpriteEntity {
         this.speed = 5;
 
         this.controls = controls;
+
+        this.bullets = [];
     }
 
     get sprite() {
@@ -18,7 +20,7 @@ class Player extends SpriteEntity {
         this._sprite = value;
     }
 
-    update() {
+    update(players) {
         if (keyDown(this.controls.up)) {
             this.move("y", -1);
         }
@@ -36,7 +38,32 @@ class Player extends SpriteEntity {
         }
 
         if (keyDown(this.controls.shoot)) {
-            // shoot
+            this.bullets.push(new Bullet(this.sprite.position));
+        }
+
+        for (const player of players) {
+            if (player === this) {
+                continue;
+            }
+
+            player.sprite.collide(this.sprite);
+
+            for (const bullet of this.bullets) {
+                if (bullet.sprite.collide(player.sprite)) {
+                    bullet.destroy();
+                    player.destroy();
+
+                    this.bullets.splice(this.bullets.indexOf(bullet), 1);
+                }
+            }
+        }
+    }
+
+    draw() {
+        super.draw();
+
+        for (const bullet of this.bullets) {
+            bullet.draw();
         }
     }
 

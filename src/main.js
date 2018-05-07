@@ -40,15 +40,7 @@ function draw() {
     clear();
 
     for (const player of config.players) {
-        player.update();
+        player.update(config.players);
         player.draw();
-
-        for (const otherPlayer of config.players) {
-            if (player === otherPlayer) {
-                continue;
-            }
-
-            player.sprite.collide(otherPlayer.sprite);
-        }
     }
 }
