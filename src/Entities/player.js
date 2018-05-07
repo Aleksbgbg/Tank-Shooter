@@ -66,7 +66,10 @@ class Player extends SpriteEntity {
             }
         }
 
-        this.cannon.update(this.sprite.position, Math.atan2(mouseY - this.sprite.position.y, mouseX - this.sprite.position.x) * 180 / Math.PI);
+        this.cannon.update(this.sprite.position, this.sprite.position.getAngleTowards({
+            x: mouseX,
+            y: mouseY
+        }));
     }
 
     draw() {
