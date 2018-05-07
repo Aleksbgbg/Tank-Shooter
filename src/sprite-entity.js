@@ -24,4 +24,8 @@ class SpriteEntity {
     draw() {
         drawSprite(this._sprite);
     }
+
+    destroy() {
+        this._sprite.remove();
+    }
 }
