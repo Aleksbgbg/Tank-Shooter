@@ -6,14 +6,26 @@ const config = {
     players: []
 };
 
+Array.prototype.remove = function(item) {
+    const index = this.indexOf(item);
+
+    if (index > -1) {
+        this.splice(index, 1);
+    }
+};
+
 function preload() {
+    function removePlayer() {
+        config.players.remove(this);
+    }
+
     config.players.push(new Player("Happy", {
         up: "W",
         down: "S",
         left: "A",
         right: "D",
         shoot: "Q"
-    }));
+    }, removePlayer));
 
     config.players.push(new Player("Neutral", {
         up: "I",
@@ -21,7 +33,7 @@ function preload() {
         left: "J",
         right: "L",
         shoot: "U"
-    }));
+    }, removePlayer));
 
     config.players.push(new Player("Smiley", {
         up: 38,
@@ -29,7 +41,7 @@ function preload() {
         left: 37,
         right: 39,
         shoot: 191
-    }));
+    }, removePlayer));
 }
 
 function setup() {

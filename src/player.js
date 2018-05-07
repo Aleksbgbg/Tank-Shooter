@@ -1,5 +1,5 @@
 class Player extends SpriteEntity {
-    constructor(emoji, controls) {
+    constructor(emoji, controls, onDeath) {
         super({
             x: 500,
             y: 500
@@ -10,6 +10,8 @@ class Player extends SpriteEntity {
         this.controls = controls;
 
         this.bullets = [];
+
+        this.onDeath = onDeath;
     }
 
     get sprite() {
@@ -53,7 +55,7 @@ class Player extends SpriteEntity {
                     bullet.destroy();
                     player.destroy();
 
-                    this.bullets.splice(this.bullets.indexOf(bullet), 1);
+                    this.bullets.remove(bullet);
                 }
             }
         }
@@ -69,5 +71,10 @@ class Player extends SpriteEntity {
 
     move(coordinate, multiplier = 1) {
         this._sprite.position[coordinate] += this.speed * multiplier;
+    }
+
+    destroy() {
+        super.destroy();
+        this.onDeath();
     }
 }
