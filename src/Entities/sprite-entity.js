@@ -5,7 +5,7 @@ class SpriteEntity {
         }
 
         this._sprite = createSprite(position.x, position.y);
-        this._sprite.addImage(loadImage(`Images/${sprite}.png`, image => image.resize(resize, 0)));
+        this._sprite.addImage(loadImage(`Images/${sprite}.png`, resize === undefined ? undefined : image => image.resize(resize, 0)));
 
         this._sprite.setCollider("circle", 0, 0, resize / 2);
     }

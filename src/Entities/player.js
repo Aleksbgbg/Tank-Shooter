@@ -5,12 +5,10 @@ class Player extends SpriteEntity {
             y: 500
         }, emoji, 100);
 
+        this.cannon = new Cannon(this);
         this.speed = 5;
-
         this.controls = controls;
-
         this.bullets = [];
-
         this.onDeath = onDeath;
     }
 
@@ -62,14 +60,18 @@ class Player extends SpriteEntity {
                 }
             }
         }
+
+        this.cannon.update(this.sprite.position, Math.atan2(mouseY - this.sprite.position.y, mouseX - this.sprite.position.x) * 180 / Math.PI);
     }
 
     draw() {
-        super.draw();
-
         for (const bullet of this.bullets) {
             bullet.draw();
         }
+
+        this.cannon.draw();
+
+        super.draw();
     }
 
     move(coordinate, multiplier = 1) {
