@@ -40,7 +40,10 @@ class Player extends SpriteEntity {
         }
 
         if (keyDown(this.controls.shoot)) {
-            this.bullets.push(new Bullet(this.sprite.position));
+            this.bullets.push(new Bullet(this.sprite.position, {
+                x: mouseX,
+                y: mouseY
+            }));
         }
 
         for (const player of players) {
