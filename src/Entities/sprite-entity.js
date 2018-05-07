@@ -1,5 +1,5 @@
 class SpriteEntity {
-    constructor(position, sprite, resize) {
+    constructor(position, sprite, resize, onDestroy) {
         if (new.target === SpriteEntity) {
             throw new TypeError("Cannot instantiate abstract class 'SpriteEntity'.");
         }
@@ -8,6 +8,8 @@ class SpriteEntity {
         this._sprite.addImage(loadImage(`Images/${sprite}.png`, resize === undefined ? undefined : image => image.resize(resize, 0)));
 
         this._sprite.setCollider("circle", 0, 0, resize / 2);
+
+        this.onDestroy = onDestroy;
     }
 
     get sprite() {
@@ -27,5 +29,6 @@ class SpriteEntity {
 
     destroy() {
         this._sprite.remove();
+        this.onDestroy();
     }
 }

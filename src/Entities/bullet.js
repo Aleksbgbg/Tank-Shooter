@@ -1,7 +1,14 @@
 class Bullet extends SpriteEntity {
-    constructor(position, target) {
-        super(position, "Bullet", 20);
+    constructor(position, target, onDestroy) {
+        super(position, "Bullet", 20, onDestroy);
 
         this.sprite.setSpeed(10, Math.atan2(target.y - position.y, target.x - position.x) * 180 / Math.PI);
+    }
+
+    update() {
+        if (0 > this.sprite.position.x || this.sprite.position.x > config.screen.width ||
+            0 > this.sprite.position.y || this.sprite.position.y > config.screen.height) {
+            this.destroy();
+        }
     }
 }

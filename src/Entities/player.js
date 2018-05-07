@@ -1,15 +1,14 @@
 class Player extends SpriteEntity {
-    constructor(emoji, controls, onDeath) {
+    constructor(emoji, controls, onDestroy) {
         super({
             x: 500,
             y: 500
-        }, emoji, 100);
+        }, emoji, 100, onDestroy);
 
         this.cannon = new Cannon(this);
         this.speed = 5;
         this.controls = controls;
         this.bullets = [];
-        this.onDeath = onDeath;
     }
 
     get sprite() {
@@ -37,10 +36,14 @@ class Player extends SpriteEntity {
             this.move("x");
         }
 
+        const bullets = this.bullets;
+
         if (keyDown(this.controls.shoot)) {
             this.bullets.push(new Bullet(this.sprite.position, {
                 x: mouseX,
                 y: mouseY
+            }, function() {
+                bullets.remove(this);
             }));
         }
 
@@ -52,6 +55,8 @@ class Player extends SpriteEntity {
             player.sprite.collide(this.sprite);
 
             for (const bullet of this.bullets) {
+                bullet.update();
+
                 if (bullet.sprite.collide(player.sprite)) {
                     bullet.destroy();
                     player.destroy();
@@ -76,10 +81,5 @@ class Player extends SpriteEntity {
 
     move(coordinate, multiplier = 1) {
         this._sprite.position[coordinate] += this.speed * multiplier;
-    }
-
-    destroy() {
-        super.destroy();
-        this.onDeath();
     }
 }
