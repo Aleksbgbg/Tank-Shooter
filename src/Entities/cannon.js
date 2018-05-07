@@ -4,10 +4,10 @@ class Cannon extends SpriteEntity {
     }
 
     update(position, rotation) {
-        const distanceFromSprite = 50;
-
-        this.sprite.position.x = position.x + distanceFromSprite * Math.cos(rotation * Math.PI / 180);
-        this.sprite.position.y = position.y + distanceFromSprite * Math.sin(rotation * Math.PI / 180);
+        this.sprite.position.x = position.x;
+        this.sprite.position.y = position.y;
         this.sprite.rotation = rotation + 90;
+
+        this.sprite.position.moveBy(50, rotation);
     }
 }
