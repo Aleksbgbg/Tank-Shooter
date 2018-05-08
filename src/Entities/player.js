@@ -42,18 +42,16 @@ class Player extends SpriteEntity {
             this.cannon.shoot();
         }
 
-        for (const player of players) {
-            if (player === this) {
-                continue;
-            }
+        const otherPlayers = players.filter(player => player !== this);
 
+        for (const player of otherPlayers) {
             player.sprite.collide(this.sprite);
         }
 
         this.cannon.update(this.sprite.position, this.sprite.position.getAngleTowards({
             x: mouseX,
             y: mouseY
-        }), players.filter(player => player !== this));
+        }), otherPlayers);
     }
 
     draw() {
