@@ -6,13 +6,8 @@ class Bullet extends SpriteEntity {
 
         this.sprite.position.moveBy(20, angle);
         this.sprite.setSpeed(10, angle);
-    }
 
-    update() {
-        if (0 > this.sprite.position.x || this.sprite.position.x > config.screen.width ||
-            0 > this.sprite.position.y || this.sprite.position.y > config.screen.height) {
-            this.destroy();
-        }
+        setTimeout(() => this.destroy(), config.bullets.deathTimer);
     }
 
     performCollision(player) {

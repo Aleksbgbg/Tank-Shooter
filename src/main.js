@@ -3,7 +3,10 @@ const config = {
         width: 800,
         height: 700
     },
-    players: []
+    players: [],
+    bullets: {
+        deathTimer: 1000
+    }
 };
 
 function preload() {
