@@ -15,7 +15,10 @@ class Bullet extends SpriteEntity {
         }
     }
 
-    isCollision(player) {
-        return player.sprite.collide(this.sprite);
+    performCollision(player) {
+        if (player.sprite.collide(this.sprite)) {
+            this.destroy();
+            player.destroy();
+        }
     }
 }

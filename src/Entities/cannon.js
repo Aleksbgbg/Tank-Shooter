@@ -3,6 +3,8 @@ class Cannon extends SpriteEntity {
         super(player.sprite.position, "Cannon", undefined, image => image.resize(20, 0));
 
         this.bullets = [];
+
+
     }
 
     shoot() {
@@ -27,10 +29,7 @@ class Cannon extends SpriteEntity {
             bullet.update();
 
             for (const player of players) {
-                if (bullet.isCollision(player)) {
-                    bullet.destroy();
-                    player.destroy();
-                }
+                bullet.performCollision(player);
             }
         }
     }
