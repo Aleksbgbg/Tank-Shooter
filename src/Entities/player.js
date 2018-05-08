@@ -38,10 +38,6 @@ class Player extends SpriteEntity {
             this.move("x");
         }
 
-        if (keyDown(this.controls.shoot)) {
-            this.cannon.shoot();
-        }
-
         const otherPlayers = players.filter(player => player !== this);
 
         for (const player of otherPlayers) {
@@ -61,5 +57,11 @@ class Player extends SpriteEntity {
 
     move(coordinate, multiplier = 1) {
         this._sprite.position[coordinate] += this.speed * multiplier;
+    }
+
+    keyPressed(key) {
+        if (key === this.controls.shoot) {
+            this.cannon.shoot();
+        }
     }
 }
