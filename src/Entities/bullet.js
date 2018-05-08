@@ -4,7 +4,7 @@ class Bullet extends SpriteEntity {
 
         const angle = position.getAngleTowards(target);
 
-        this.sprite.position.moveBy(80, angle);
+        this.sprite.position.moveBy(20, angle);
         this.sprite.setSpeed(10, angle);
     }
 
@@ -13,5 +13,9 @@ class Bullet extends SpriteEntity {
             0 > this.sprite.position.y || this.sprite.position.y > config.screen.height) {
             this.destroy();
         }
+    }
+
+    isCollision(player) {
+        return player.sprite.collide(this.sprite);
     }
 }

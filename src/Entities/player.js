@@ -11,7 +11,6 @@ class Player extends SpriteEntity {
         this.cannon = new Cannon(this);
         this.speed = 5;
         this.controls = controls;
-        this.bullets = [];
     }
 
     get sprite() {
@@ -39,15 +38,8 @@ class Player extends SpriteEntity {
             this.move("x");
         }
 
-        const bullets = this.bullets;
-
         if (keyDown(this.controls.shoot)) {
-            this.bullets.push(new Bullet(this.sprite.position, {
-                x: mouseX,
-                y: mouseY
-            }, function() {
-                bullets.remove(this);
-            }));
+            this.cannon.shoot();
         }
 
         for (const player of players) {
@@ -56,32 +48,16 @@ class Player extends SpriteEntity {
             }
 
             player.sprite.collide(this.sprite);
-
-            for (const bullet of this.bullets) {
-                bullet.update();
-
-                if (bullet.sprite.collide(player.sprite)) {
-                    bullet.destroy();
-                    player.destroy();
-
-                    this.bullets.remove(bullet);
-                }
-            }
         }
 
         this.cannon.update(this.sprite.position, this.sprite.position.getAngleTowards({
             x: mouseX,
             y: mouseY
-        }));
+        }), players.filter(player => player !== this));
     }
 
     draw() {
-        for (const bullet of this.bullets) {
-            bullet.draw();
-        }
-
         this.cannon.draw();
-
         super.draw();
     }
 
