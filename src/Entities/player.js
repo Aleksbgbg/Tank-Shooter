@@ -1,16 +1,31 @@
 class Player extends SpriteEntity {
     constructor(emoji, controls, onDestroy) {
         super({
-            x: 500,
-            y: 500
-        },
+                x: 500,
+                y: 500
+            },
             emoji, onDestroy,
-                image => image.resize(100, 0),
-                sprite => sprite.setCollider("circle", 0, 0, 50));
+            image => image.resize(100, 0),
+            sprite => sprite.setCollider("circle", 0, 0, 50));
 
         this.cannon = new Cannon(this);
         this.speed = 5;
         this.controls = controls;
+
+        const controlActions = {
+            up: () => this.move("y", -1),
+            down: () => this.move("y"),
+            left: () => this.move("x", -1),
+            right: () => this.move("x"),
+            shoot: () => this.cannon.shoot()
+        };
+
+        for (const control in this.controls) {
+            this.controls[control] = {
+                key: this.controls[control],
+                action: controlActions[control]
+            };
+        }
     }
 
     get sprite() {
@@ -22,20 +37,10 @@ class Player extends SpriteEntity {
     }
 
     update(players) {
-        if (keyDown(this.controls.up)) {
-            this.move("y", -1);
-        }
-
-        if (keyDown(this.controls.down)) {
-            this.move("y");
-        }
-
-        if (keyDown(this.controls.left)) {
-            this.move("x", -1);
-        }
-
-        if (keyDown(this.controls.right)) {
-            this.move("x");
+        for (const controlKey of ["up", "down", "left", "right"]) {
+            if (keyDown(this.controls[controlKey].key)) {
+                this.controls[controlKey].action();
+            }
         }
 
         const otherPlayers = players.filter(player => player !== this);
@@ -60,8 +65,8 @@ class Player extends SpriteEntity {
     }
 
     keyPressed(key) {
-        if (key === this.controls.shoot) {
-            this.cannon.shoot();
+        if (key === this.controls.shoot.key) {
+            this.controls.shoot.action();
         }
     }
 }
