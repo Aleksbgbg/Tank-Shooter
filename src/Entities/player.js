@@ -22,7 +22,7 @@ class Player extends SpriteEntity {
 
         for (const control in this.controls) {
             this.controls[control] = {
-                key: this.controls[control],
+                keyCode: this.controls[control],
                 action: controlActions[control]
             };
         }
@@ -38,7 +38,7 @@ class Player extends SpriteEntity {
 
     update(players) {
         for (const controlKey of ["up", "down", "left", "right"]) {
-            if (keyDown(this.controls[controlKey].key)) {
+            if (keyDown(this.controls[controlKey].keyCode)) {
                 this.controls[controlKey].action();
             }
         }
@@ -65,7 +65,7 @@ class Player extends SpriteEntity {
     }
 
     keyPressed(key) {
-        if (key === this.controls.shoot.key) {
+        if (key === this.controls.shoot.keyCode) {
             this.controls.shoot.action();
         }
     }
