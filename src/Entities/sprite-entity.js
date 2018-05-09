@@ -1,5 +1,5 @@
 class SpriteEntity {
-    constructor(position, sprite, onDestroy, imageSetup, spriteSetup) {
+    constructor(position, sprite, imageSetup, spriteSetup, onDestroy = () => { }) {
         if (new.target === SpriteEntity) {
             throw new TypeError("Cannot instantiate abstract class 'SpriteEntity'.");
         }

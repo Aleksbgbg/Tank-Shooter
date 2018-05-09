@@ -1,12 +1,9 @@
 class Player extends SpriteEntity {
     constructor(emoji, controls, onDestroy) {
         super({
-                x: 500,
-                y: 500
-            },
-            emoji, onDestroy,
-            image => image.resize(100, 0),
-            sprite => sprite.setCollider("circle", 0, 0, 50));
+            x: 500,
+            y: 500
+        }, emoji, image => image.resize(100, 0), sprite => sprite.setCollider("circle", 0, 0, 50), onDestroy);
 
         this.cannon = new Cannon(this);
         this.speed = 5;

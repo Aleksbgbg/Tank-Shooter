@@ -1,6 +1,6 @@
 class Bullet extends SpriteEntity {
     constructor(position, target, onDestroy) {
-        super(position, "Bullet", onDestroy, image => image.resize(20, 0));
+        super(position, "Bullet", image => image.resize(20, 0), undefined, onDestroy);
 
         const angle = position.getAngleTowards(target);
 
