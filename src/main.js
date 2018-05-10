@@ -6,10 +6,13 @@ const config = {
     players: [],
     bullets: {
         deathTimer: 1000
-    }
+    },
+    map: null
 };
 
 function preload() {
+    config.map = new GameMap();
+
     function removePlayer() {
         config.players.remove(this);
     }
@@ -45,6 +48,9 @@ function setup() {
 
 function draw() {
     clear();
+
+    config.map.update();
+    config.map.draw();
 
     for (const player of config.players) {
         player.update(config.players);
