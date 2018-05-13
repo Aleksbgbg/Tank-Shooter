@@ -26,6 +26,7 @@ class SpriteEntity {
 
         this._sprite = createSprite(parameters.position.x, parameters.position.y);
         this._sprite.addImage(spriteCache[parameters.sprite]);
+        this._sprite.spriteEntity = this;
 
         parameters.spriteSetup(this.sprite);
 
