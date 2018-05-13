@@ -3,8 +3,8 @@ class Player extends SpriteEntity {
         super({
             position: createVector(500, 500),
             sprite: emoji,
-            imageSetup: image => image.resize(100, 0),
-            spriteSetup: sprite => sprite.setCollider("circle", 0, 0, 50),
+            imageSetup: image => image.resize(50, 0),
+            spriteSetup: sprite => sprite.setCollider("circle", 0, 0, 25),
             onDestroy
         });
 
