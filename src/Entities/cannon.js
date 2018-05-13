@@ -27,13 +27,10 @@ class Cannon extends SpriteEntity {
 
         this.sprite.position.moveBy(30, rotation);
 
-        for (const bullet of this.bullets) {
-            bullet.update();
-
-            for (const player of players) {
-                bullet.performCollision(player);
-            }
-        }
+        config.playersGroup.overlap(config.bullets.group, function(player, bullet) {
+            player.spriteEntity.destroy();
+            bullet.spriteEntity.destroy();
+        });
     }
 
     draw() {

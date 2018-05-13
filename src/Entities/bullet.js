@@ -15,11 +15,4 @@ class Bullet extends SpriteEntity {
 
         setTimeout(() => this.destroy(), config.bullets.deathTimer);
     }
-
-    performCollision(player) {
-        if (player.sprite.collide(this.sprite)) {
-            this.destroy();
-            player.destroy();
-        }
-    }
 }
