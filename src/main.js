@@ -4,6 +4,7 @@ const config = {
         height: 700
     },
     players: [],
+    playersGroup: null,
     bullets: {
         deathTimer: 4000,
         group: null
@@ -17,6 +18,7 @@ const config = {
 function preload() {
     config.map = new GameMap();
     config.bullets.group = new Group();
+    config.playersGroup = new Group();
 
     function removePlayer() {
         config.players.remove(this);
