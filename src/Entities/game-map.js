@@ -1,21 +1,24 @@
 class GameMap {
     constructor() {
-        this.tile = new MapTile({
-            x: config.screen.width / 2,
-            y: 0
-        }, {
-            width: config.screen.width,
-            height: 10
-        });
-    }
+        this.tilesGroup = new Group();
+        this.tiles = [];
 
-    update() {
-        for (const sprite of allSprites) {
-            sprite.bounce(this.tile.sprite);
+        for (let index = 0; index < 10; ++index) {
+            const mapTile = new MapTile({
+                x: 45 + index * 90,
+                y: 11
+            });
+
+            this.tiles.push(mapTile);
+            this.tilesGroup.add(mapTile.sprite);
         }
     }
 
+    update() {
+        config.bullets.group.bounce(this.tilesGroup);
+    }
+
     draw() {
-        this.tile.draw();
+        this.tilesGroup.draw();
     }
 }
