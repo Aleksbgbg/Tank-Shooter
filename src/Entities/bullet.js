@@ -9,7 +9,6 @@ class Bullet extends SpriteEntity {
 
         const angle = position.getAngleTowards(target);
 
-        this.sprite.position.moveBy(20, angle);
         this.sprite.setSpeed(10, angle);
 
         config.bullets.group.add(this.sprite);

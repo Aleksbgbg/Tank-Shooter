@@ -25,7 +25,7 @@ class Cannon extends SpriteEntity {
         this.sprite.position.y = position.y;
         this.sprite.rotation = rotation + 90;
 
-        this.sprite.position.moveBy(50, rotation);
+        this.sprite.position.moveBy(30, rotation);
 
         for (const bullet of this.bullets) {
             bullet.update();
