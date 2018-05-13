@@ -8,9 +8,8 @@ const config = {
         deathTimer: 1000,
         group: null
     },
-    mapTiles: {
-        width: 22,
-        height: 22
+    mapTile: {
+        dimension: 22
     },
     map: null
 };

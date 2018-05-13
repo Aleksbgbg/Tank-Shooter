@@ -4,17 +4,16 @@ class GameMap {
         this.tiles = [];
 
         const makeWall = (startPosition, tileCount, direction) => {
-            const tileWidthHalf = config.mapTiles.width / 2;
-            const tileHeightHalf = config.mapTiles.height / 2;
+            const halfTile = config.mapTile.dimension / 2;
 
-            startPosition.add(direction === "x" ? createVector(tileWidthHalf, 0) : createVector(0, tileHeightHalf));
+            startPosition.add(direction === "x" ? createVector(halfTile, 0) : createVector(0, halfTile));
 
             const vectorFactory = (function() {
                 if (direction === "x") {
-                    return (iteration) => createVector(iteration * config.mapTiles.width, tileHeightHalf);
+                    return (iteration) => createVector(iteration * config.mapTile.dimension, halfTile);
                 }
 
-                return (iteration) => createVector(tileWidthHalf, iteration * config.mapTiles.height);
+                return (iteration) => createVector(halfTile, iteration * config.mapTile.dimension);
             })();
 
             for (let iteration = 0; iteration < tileCount; ++iteration) {
@@ -26,14 +25,14 @@ class GameMap {
         };
 
         function getTiles(pixels) {
-            return pixels / config.mapTiles.width;
+            return pixels / config.mapTile.dimension;
         }
 
         makeWall(createVector(0, 0), getTiles(config.screen.width) - 1, "x"); // top
-        makeWall(createVector(config.mapTiles.width, config.screen.height - config.mapTiles.height), getTiles(config.screen.width) - 1, "x"); // bottom
+        makeWall(createVector(config.mapTile.dimension, config.screen.height - config.mapTile.dimension), getTiles(config.screen.width) - 1, "x"); // bottom
 
-        makeWall(createVector(0, config.mapTiles.height), getTiles(config.screen.height) - 1, "y"); // left
-        makeWall(createVector(config.screen.width - config.mapTiles.width, 0), getTiles(config.screen.height) - 1, "y"); // right
+        makeWall(createVector(0, config.mapTile.dimension), getTiles(config.screen.height) - 1, "y"); // left
+        makeWall(createVector(config.screen.width - config.mapTile.dimension, 0), getTiles(config.screen.height) - 1, "y"); // right
     }
 
     update() {
