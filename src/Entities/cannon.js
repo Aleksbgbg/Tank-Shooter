@@ -27,12 +27,4 @@ class Cannon extends SpriteEntity {
 
         this.sprite.position.moveBy(30, rotation);
     }
-
-    draw() {
-        for (const bullet of this.bullets) {
-            bullet.draw();
-        }
-
-        super.draw();
-    }
 }

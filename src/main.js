@@ -63,6 +63,8 @@ function draw() {
     config.map.update();
     config.map.draw();
 
+    config.groups.bullets.draw();
+
     config.groups.players.overlap(config.groups.bullets, function(player, bullet) {
         player.spriteEntity.destroy();
         bullet.spriteEntity.destroy();
