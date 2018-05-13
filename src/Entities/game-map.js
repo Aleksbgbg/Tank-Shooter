@@ -3,15 +3,33 @@ class GameMap {
         this.tilesGroup = new Group();
         this.tiles = [];
 
-        for (let index = 0; index < 10; ++index) {
-            const mapTile = new MapTile({
-                x: 45 + index * 90,
-                y: 11
-            });
+        const makeWall = (startPosition, tileCount, direction) => {
+            const start = (function() {
+                if (direction === "x") {
+                    return createVector(startPosition, 11);
+                }
 
-            this.tiles.push(mapTile);
-            this.tilesGroup.add(mapTile.sprite);
-        }
+                return createVector(45, startPosition);
+            })();
+
+            const vectorFactory = (function() {
+                if (direction === "x") {
+                    return (iteration) => createVector(iteration * 90, 11);
+                }
+
+                return (iteration) => createVector(11, iteration * 90);
+            })();
+
+            for (let iteration = 0; iteration < tileCount; ++iteration) {
+                const mapTile = new MapTile(p5.Vector.add(start, vectorFactory(iteration)));
+
+                this.tiles.push(mapTile);
+                this.tilesGroup.add(mapTile.sprite);
+            }
+        };
+
+        makeWall(45, 10, "x");
+        makeWall(45, 10, "y");
     }
 
     update() {

@@ -3,6 +3,7 @@ class MapTile extends SpriteEntity {
         super({
             position,
             sprite: "Minus",
+            imageSetup: image => image.resize(22, 22),
             spriteSetup: sprite => sprite.immovable = true
         });
     }
