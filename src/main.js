@@ -5,13 +5,15 @@ const config = {
     },
     players: [],
     bullets: {
-        deathTimer: 1000
+        deathTimer: 1000,
+        group: null
     },
     map: null
 };
 
 function preload() {
     config.map = new GameMap();
+    config.bullets.group = new Group();
 
     function removePlayer() {
         config.players.remove(this);
