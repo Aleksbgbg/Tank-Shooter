@@ -5,7 +5,7 @@ const config = {
     },
     players: [],
     bullets: {
-        deathTimer: 1000,
+        deathTimer: 4000,
         group: null
     },
     mapTile: {
