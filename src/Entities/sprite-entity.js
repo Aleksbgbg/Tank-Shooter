@@ -1,3 +1,5 @@
+const spriteCache = { };
+
 class SpriteEntity {
     constructor(parametersInput) {
         if (new.target === SpriteEntity) {
@@ -18,8 +20,12 @@ class SpriteEntity {
             }
         }
 
+        if (!spriteCache.hasOwnProperty(parameters.sprite)) {
+            spriteCache[parameters.sprite] = loadImage(`Images/${parameters.sprite}.png`, parameters.imageSetup);
+        }
+
         this._sprite = createSprite(parameters.position.x, parameters.position.y);
-        this._sprite.addImage(loadImage(`Images/${parameters.sprite}.png`, parameters.imageSetup));
+        this._sprite.addImage(spriteCache[parameters.sprite]);
 
         parameters.spriteSetup(this.sprite);
 
