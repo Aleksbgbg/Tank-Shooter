@@ -4,10 +4,12 @@ const config = {
         height: 700
     },
     players: [],
-    playersGroup: null,
+    groups: {
+        players: undefined,
+        bullets: undefined
+    },
     bullets: {
-        deathTimer: 4000,
-        group: null
+        deathTimer: 4000
     },
     mapTile: {
         dimension: 22
@@ -16,9 +18,11 @@ const config = {
 };
 
 function preload() {
+    for (const group in config.groups) {
+        config.groups[group] = new Group();
+    }
+
     config.map = new GameMap();
-    config.bullets.group = new Group();
-    config.playersGroup = new Group();
 
     function removePlayer() {
         config.players.remove(this);
@@ -58,6 +62,11 @@ function draw() {
 
     config.map.update();
     config.map.draw();
+
+    config.groups.players.overlap(config.groups.bullets, function(player, bullet) {
+        player.spriteEntity.destroy();
+        bullet.spriteEntity.destroy();
+    });
 
     for (const player of config.players) {
         player.update(config.players);

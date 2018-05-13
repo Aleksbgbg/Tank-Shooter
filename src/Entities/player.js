@@ -6,7 +6,7 @@ class Player extends SpriteEntity {
             imageSetup: image => image.resize(50, 0),
             spriteSetup: sprite => {
                 sprite.setCollider("circle", 0, 0, 25);
-                config.playersGroup.add(sprite);
+                config.groups.players.add(sprite);
             },
             onDestroy
         });
@@ -56,7 +56,7 @@ class Player extends SpriteEntity {
         this.cannon.update(this.sprite.position, this.sprite.position.getAngleTowards({
             x: mouseX,
             y: mouseY
-        }), otherPlayers);
+        }));
     }
 
     draw() {

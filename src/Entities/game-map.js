@@ -36,8 +36,8 @@ class GameMap {
     }
 
     update() {
-        config.bullets.group.bounce(this.tilesGroup);
-        config.playersGroup.collide(this.tilesGroup);
+        config.groups.bullets.bounce(this.tilesGroup);
+        config.groups.players.collide(this.tilesGroup);
     }
 
     draw() {

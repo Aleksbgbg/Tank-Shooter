@@ -11,7 +11,7 @@ class Bullet extends SpriteEntity {
 
         this.sprite.setSpeed(10, angle);
 
-        config.bullets.group.add(this.sprite);
+        config.groups.bullets.add(this.sprite);
 
         setTimeout(() => this.destroy(), config.bullets.deathTimer);
     }

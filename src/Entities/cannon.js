@@ -20,17 +20,12 @@ class Cannon extends SpriteEntity {
         }));
     }
 
-    update(position, rotation, players) {
+    update(position, rotation) {
         this.sprite.position.x = position.x;
         this.sprite.position.y = position.y;
         this.sprite.rotation = rotation + 90;
 
         this.sprite.position.moveBy(30, rotation);
-
-        config.playersGroup.overlap(config.bullets.group, function(player, bullet) {
-            player.spriteEntity.destroy();
-            bullet.spriteEntity.destroy();
-        });
     }
 
     draw() {
