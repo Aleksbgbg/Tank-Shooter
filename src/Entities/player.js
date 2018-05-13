@@ -32,14 +32,6 @@ class Player extends SpriteEntity {
         }
     }
 
-    get sprite() {
-        return this._sprite;
-    }
-
-    set sprite(value) {
-        this._sprite = value;
-    }
-
     update(players) {
         for (const controlKey of ["up", "down", "left", "right"]) {
             if (keyDown(this.controls[controlKey].keyCode)) {
