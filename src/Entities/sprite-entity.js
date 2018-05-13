@@ -1,17 +1,29 @@
 class SpriteEntity {
-    constructor(position, sprite, imageSetup, spriteSetup, onDestroy = () => { }) {
+    constructor(parametersInput) {
         if (new.target === SpriteEntity) {
             throw new TypeError("Cannot instantiate abstract class 'SpriteEntity'.");
         }
 
-        this._sprite = createSprite(position.x, position.y);
-        this._sprite.addImage(loadImage(`Images/${sprite}.png`, imageSetup));
+        const parameters = {
+            position: createVector(0, 0),
+            sprite: "",
+            imageSetup: image => { },
+            spriteSetup: sprite => { },
+            onDestroy: () => { }
+        };
 
-        if (spriteSetup !== undefined) {
-            spriteSetup(this._sprite);
+        for (const parameter in parametersInput) {
+            if (parameters.hasOwnProperty(parameter)) {
+                parameters[parameter] = parametersInput[parameter];
+            }
         }
 
-        this.onDestroy = onDestroy;
+        this._sprite = createSprite(parameters.position.x, parameters.position.y);
+        this._sprite.addImage(loadImage(`Images/${parameters.sprite}.png`, parameters.imageSetup));
+
+        parameters.spriteSetup(this.sprite);
+
+        this.onDestroy = parameters.onDestroy;
     }
 
     get sprite() {

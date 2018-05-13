@@ -1,6 +1,10 @@
 class Cannon extends SpriteEntity {
     constructor(player) {
-        super(player.sprite.position, "Cannon", image => image.resize(20, 0), undefined, undefined);
+        super({
+            position: player.sprite.position,
+            sprite: "Cannon",
+            imageSetup: image => image.resize(20, 0)
+        });
 
         this.bullets = [];
     }

@@ -1,13 +1,17 @@
 class Player extends SpriteEntity {
     constructor(emoji, controls, onDestroy) {
         super({
-            x: 500,
-            y: 500
-        }, emoji, image => image.resize(100, 0), sprite => sprite.setCollider("circle", 0, 0, 50), onDestroy);
+            position: createVector(500, 500),
+            sprite: emoji,
+            imageSetup: image => image.resize(100, 0),
+            spriteSetup: sprite => sprite.setCollider("circle", 0, 0, 50),
+            onDestroy
+        });
 
         this.cannon = new Cannon(this);
         this.speed = 5;
-        this.controls = controls;
+
+        this.controls = { };
 
         const controlActions = {
             up: () => this.move("y", -1),
@@ -17,9 +21,9 @@ class Player extends SpriteEntity {
             shoot: () => this.cannon.shoot()
         };
 
-        for (const control in this.controls) {
+        for (const control in controls) {
             this.controls[control] = {
-                keyCode: this.controls[control],
+                keyCode: controls[control],
                 action: controlActions[control]
             };
         }
