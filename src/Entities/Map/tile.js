@@ -7,6 +7,8 @@ class Tile extends SpriteEntity {
         });
 
         this.isSolid = isSolid;
+
+        config.groups.tiles.add(this.sprite);
     }
 
     static get dimension() {

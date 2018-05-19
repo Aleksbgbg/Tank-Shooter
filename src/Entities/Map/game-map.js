@@ -13,7 +13,8 @@ class GameMap {
     }
 
     update() {
-
+        config.groups.bullets.bounce(config.groups.tiles);
+        config.groups.players.collide(config.groups.tiles);
     }
 
     draw() {
@@ -21,28 +22,4 @@ class GameMap {
             tile.draw();
         }
     }
-
-    // render(region) {
-    //     const tileRegion = {
-    //         x: {
-    //             start: Math.floor(region.x / Tile.dimension)
-    //         },
-    //         y: {
-    //             start: Math.floor(region.y / Tile.dimension)
-    //         }
-    //     };
-    //
-    //     tileRegion.x.end = tileRegion.x.start + Math.floor(region.width / Tile.dimension) + 1;
-    //     tileRegion.y.end = tileRegion.y.start + Math.floor(region.height / Tile.dimension) + 1;
-    //
-    //     for (let x = tileRegion.x.start; x < tileRegion.x.end; ++x) {
-    //         for (let y = tileRegion.y.start; y < tileRegion.y.end; ++y) {
-    //             const position = createVector(x, y);
-    //
-    //             if (this.grid.exists(position)) {
-    //                 this.grid.getTile(position).draw(createVector(-region.x, -region.y));
-    //             }
-    //         }
-    //     }
-    // }
 }
