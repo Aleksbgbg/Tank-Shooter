@@ -41,6 +41,14 @@ class SpriteEntity {
         this._sprite = value;
     }
 
+    get position() {
+        return this.sprite.position;
+    }
+
+    set position(value) {
+        this.sprite.position = value;
+    }
+
     update() {
     }
 

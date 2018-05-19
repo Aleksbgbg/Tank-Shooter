@@ -17,12 +17,14 @@ const config = {
     map: null
 };
 
+let text = [];
+
 function preload() {
     for (const group in config.groups) {
         config.groups[group] = new Group();
     }
 
-    config.map = new GameMap();
+    text = loadStrings("Entities/Map/map.txt");
 
     function removePlayer() {
         config.players.remove(this);
@@ -54,6 +56,7 @@ function preload() {
 }
 
 function setup() {
+    config.map = new GameMap(text);
     createCanvas(config.screen.width, config.screen.height);
 }
 
