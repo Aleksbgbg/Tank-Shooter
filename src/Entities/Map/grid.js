@@ -9,9 +9,9 @@ class Grid {
             for (let y = 0; y < this.height; ++y) {
                 const vector = createVector(x, y);
 
-                const z = Math.floor(Tile.dimension / 2);
+                const offset = Math.floor(Tile.dimension / 2);
 
-                this.getTile(vector).position = vector.mult(Tile.dimension).add(z, z);
+                this.getTile(vector).position = vector.mult(Tile.dimension).add(offset, offset);
             }
         }
     }
