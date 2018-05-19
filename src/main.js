@@ -4,10 +4,7 @@ const config = {
         height: 700
     },
     players: [],
-    groups: {
-        players: undefined,
-        bullets: undefined
-    },
+    groups: { },
     bullets: {
         deathTimer: 4000
     },
@@ -20,7 +17,7 @@ const config = {
 let text = [];
 
 function preload() {
-    for (const group in config.groups) {
+    for (const group of ["players", "bullets", "tiles"]) {
         config.groups[group] = new Group();
     }
 
