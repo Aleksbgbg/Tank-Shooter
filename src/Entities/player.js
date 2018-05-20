@@ -4,12 +4,11 @@ class Player extends SpriteEntity {
             position: createVector(500, 500),
             sprite: emoji,
             imageSetup: image => image.resize(25, 0),
-            spriteSetup: sprite => {
-                sprite.setCollider("circle", 0, 0, 12);
-                config.groups.players.add(sprite);
-            },
+            spriteSetup: sprite =>  sprite.setCollider("circle", 0, 0, 12),
             onDestroy
         });
+
+        config.groups.players.add(this.sprite);
 
         this.cannon = new Cannon(this);
         this.speed = 5;
