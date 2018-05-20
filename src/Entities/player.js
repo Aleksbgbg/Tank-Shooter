@@ -5,7 +5,7 @@ class Player extends SpriteEntity {
             sprite: emoji,
             imageSetup: image => image.resize(25, 0),
             spriteSetup: sprite => {
-                sprite.setCollider("circle", 0, 0, 20);
+                sprite.setCollider("circle", 0, 0, 12);
                 config.groups.players.add(sprite);
             },
             onDestroy
