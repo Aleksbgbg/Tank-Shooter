@@ -16,7 +16,7 @@ class Cannon extends SpriteEntity {
 
         const mouseVector = createVector(mouseX, mouseY);
 
-        position.moveBy(1, position.getAngleTowards(mouseVector));
+        position.moveBy(5, position.getAngleTowards(mouseVector));
 
         this.bullets.push(new Bullet(position, mouseVector, function() {
             bullets.remove(this);
