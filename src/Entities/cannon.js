@@ -10,6 +10,10 @@ class Cannon extends SpriteEntity {
     }
 
     shoot() {
+        if (this.bullets.length >= 5) {
+            return;
+        }
+
         const bullets = this.bullets;
 
         const position = createVector(this.sprite.position.x, this.sprite.position.y);
