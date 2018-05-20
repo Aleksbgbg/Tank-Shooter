@@ -3,7 +3,7 @@ class Bullet extends SpriteEntity {
         super({
             position,
             sprite: "Bullet",
-            imageSetup: image => image.resize(20, 0),
+            imageSetup: image => image.resize(10, 0),
             onDestroy
         });
 

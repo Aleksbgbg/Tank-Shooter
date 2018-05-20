@@ -3,7 +3,7 @@ class Cannon extends SpriteEntity {
         super({
             position: player.sprite.position,
             sprite: "Cannon",
-            imageSetup: image => image.resize(20, 0)
+            imageSetup: image => image.resize(10, 0)
         });
 
         this.bullets = [];
@@ -12,10 +12,13 @@ class Cannon extends SpriteEntity {
     shoot() {
         const bullets = this.bullets;
 
-        this.bullets.push(new Bullet(this.sprite.position, {
-            x: mouseX,
-            y: mouseY
-        }, function() {
+        const position = createVector(this.sprite.position.x, this.sprite.position.y);
+
+        const mouseVector = createVector(mouseX, mouseY);
+
+        position.moveBy(1, position.getAngleTowards(mouseVector));
+
+        this.bullets.push(new Bullet(position, mouseVector, function() {
             bullets.remove(this);
         }));
     }
@@ -25,6 +28,6 @@ class Cannon extends SpriteEntity {
         this.sprite.position.y = position.y;
         this.sprite.rotation = rotation + 90;
 
-        this.sprite.position.moveBy(30, rotation);
+        this.sprite.position.moveBy(15, rotation);
     }
 }
