@@ -24,9 +24,9 @@ class SpriteEntity {
             spriteCache[parameters.sprite] = loadImage(`Images/${parameters.sprite}.png`, parameters.imageSetup);
         }
 
-        this._sprite = createSprite(parameters.position.x, parameters.position.y);
-        this._sprite.addImage(spriteCache[parameters.sprite]);
-        this._sprite.spriteEntity = this;
+        this.sprite = createSprite(parameters.position.x, parameters.position.y);
+        this.sprite.addImage(spriteCache[parameters.sprite]);
+        this.sprite.spriteEntity = this;
 
         parameters.spriteSetup(this.sprite);
 
@@ -53,11 +53,11 @@ class SpriteEntity {
     }
 
     draw() {
-        drawSprite(this._sprite);
+        drawSprite(this.sprite);
     }
 
     destroy() {
-        this._sprite.remove();
+        this.sprite.remove();
         this.onDestroy();
     }
 }
