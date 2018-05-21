@@ -25,26 +25,26 @@ function preload() {
     }
 
     config.players.push(new Player("Happy", {
-        up: 87, // W
-        down: 83, // S
-        left: 65, // A
-        right: 68, // D
+        forward: 87, // W
+        backward: 83, // S
+        rotateLeft: 65, // A
+        rotateRight: 68, // D
         shoot: 81 // Q
     }, removePlayer));
 
     config.players.push(new Player("Neutral", {
-        up: 73, // I
-        down: 75, // K
-        left: 74, // J
-        right: 76, // L
+        forward: 73, // I
+        backward: 75, // K
+        rotateLeft: 74, // J
+        rotateRight: 76, // L
         shoot: 85 // U
     }, removePlayer));
 
     config.players.push(new Player("Smiley", {
-        up: 38, // Up arrow
-        down: 40, // Down arrow
-        left: 37, // Left arrow
-        right: 39, // Right arrow
+        forward: 38, // Up arrow
+        backward: 40, // Down arrow
+        rotateLeft: 37, // Left arrow
+        rotateRight: 39, // Right arrow
         shoot: 191 // Forward slash ('/')
     }, removePlayer));
 }

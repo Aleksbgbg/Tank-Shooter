@@ -16,10 +16,10 @@ class Player extends SpriteEntity {
         this.controls = { };
 
         const controlActions = {
-            up: () => this.move("y", -1),
-            down: () => this.move("y"),
-            left: () => this.move("x", -1),
-            right: () => this.move("x"),
+            forward: () => this.move(1),
+            backward: () => this.move(-1),
+            rotateLeft: () => this.cannon.rotate(-1),
+            rotateRight: () => this.cannon.rotate(1),
             shoot: () => this.cannon.shoot()
         };
 
@@ -32,7 +32,7 @@ class Player extends SpriteEntity {
     }
 
     update(players) {
-        for (const controlKey of ["up", "down", "left", "right"]) {
+        for (const controlKey of ["forward", "backward", "rotateLeft", "rotateRight"]) {
             if (keyDown(this.controls[controlKey].keyCode)) {
                 this.controls[controlKey].action();
             }
@@ -46,8 +46,8 @@ class Player extends SpriteEntity {
         super.draw();
     }
 
-    move(coordinate, multiplier = 1) {
-        this._sprite.position[coordinate] += this.speed * multiplier;
+    move(magnitude) {
+        this.sprite.position.moveBy(this.speed * magnitude, this.cannon.rotation);
     }
 
     keyPressed(key) {

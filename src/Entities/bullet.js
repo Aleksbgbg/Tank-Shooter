@@ -1,5 +1,5 @@
 class Bullet extends SpriteEntity {
-    constructor(position, target, onDestroy) {
+    constructor(position, targetAngle, onDestroy) {
         super({
             position,
             sprite: "Bullet",
@@ -7,9 +7,7 @@ class Bullet extends SpriteEntity {
             onDestroy
         });
 
-        const angle = position.getAngleTowards(target);
-
-        this.sprite.setSpeed(10, angle);
+        this.sprite.setSpeed(10, targetAngle);
 
         config.groups.bullets.add(this.sprite);
 

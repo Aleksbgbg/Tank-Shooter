@@ -7,6 +7,16 @@ class Cannon extends SpriteEntity {
         });
 
         this.bullets = [];
+        this.rotation = 0;
+    }
+
+    get rotation() {
+        return this._rotation;
+    }
+
+    set rotation(value) {
+        this._rotation = value;
+        this.sprite.rotation = this._rotation + 90;
     }
 
     shoot() {
@@ -17,21 +27,19 @@ class Cannon extends SpriteEntity {
         const bullets = this.bullets;
 
         const position = createVector(this.sprite.position.x, this.sprite.position.y);
+        position.moveBy(15, this.rotation);
 
-        const mouseVector = createVector(mouseX, mouseY);
-
-        position.moveBy(5, position.getAngleTowards(mouseVector));
-
-        this.bullets.push(new Bullet(position, mouseVector, function() {
+        this.bullets.push(new Bullet(position, this.rotation, function() {
             bullets.remove(this);
         }));
     }
 
-    update(position, rotation) {
-        this.sprite.position.x = position.x;
-        this.sprite.position.y = position.y;
-        this.sprite.rotation = rotation + 90;
+    update(position) {
+        this.sprite.position = createVector(position.x, position.y);
+        this.sprite.position.moveBy(15, this.rotation);
+    }
 
-        this.sprite.position.moveBy(15, rotation);
+    rotate(magnitude) {
+        this.rotation += 5 * magnitude;
     }
 }
