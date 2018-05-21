@@ -10,8 +10,7 @@ const config = {
     },
     mapTile: {
         dimension: 22
-    },
-    map: null
+    }
 };
 
 let text = [];
