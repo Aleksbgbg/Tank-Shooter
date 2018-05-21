@@ -13,14 +13,12 @@ const config = {
     }
 };
 
-let text = [];
-
 function preload() {
     for (const group of ["players", "bullets", "tiles"]) {
         config.groups[group] = new Group();
     }
 
-    text = loadStrings("Entities/Map/map.txt");
+    loadStrings("Entities/Map/map.txt", mapText => config.map = new GameMap(mapText));
 
     function removePlayer() {
         config.players.remove(this);
@@ -52,7 +50,6 @@ function preload() {
 }
 
 function setup() {
-    config.map = new GameMap(text);
     createCanvas(config.screen.width, config.screen.height);
 }
 
