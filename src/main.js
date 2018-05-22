@@ -24,7 +24,21 @@ function preload() {
         function removePlayer() {
             config.players.remove(this);
 
-            if (config.players.length < 2) {
+            if (config.players.length === 1) {
+                let resetBoard = false;
+
+                for (const score in config.scoreboard.scores) {
+                    if (config.scoreboard.scores[score].value > 8) {
+                        config.scoreboard.reset();
+                        resetBoard = true;
+                        break;
+                    }
+                }
+
+                if (!resetBoard) {
+                    config.scoreboard.scores[config.players[0].name].increment();
+                }
+
                 for (const player of config.players) {
                     player.destroy();
                 }
@@ -34,7 +48,7 @@ function preload() {
             }
         }
 
-        config.players.push(new Player("Happy", {
+        config.players.push(new Player("Player1", "Happy", {
             forward: 87, // W
             backward: 83, // S
             rotateLeft: 65, // A
@@ -42,7 +56,7 @@ function preload() {
             shoot: 81 // Q
         }, removePlayer));
 
-        config.players.push(new Player("Neutral", {
+        config.players.push(new Player("Player2", "Neutral", {
             forward: 73, // I
             backward: 75, // K
             rotateLeft: 74, // J
@@ -50,7 +64,7 @@ function preload() {
             shoot: 85 // U
         }, removePlayer));
 
-        config.players.push(new Player("Smiley", {
+        config.players.push(new Player("Player3", "Smiley", {
             forward: 38, // Up arrow
             backward: 40, // Down arrow
             rotateLeft: 37, // Left arrow
@@ -60,10 +74,12 @@ function preload() {
     }
 
     load();
+
+    config.scoreboard = new Scoreboard(config.players);
 }
 
 function setup() {
-    createCanvas(config.screen.width, config.screen.height);
+    createCanvas(config.screen.width, config.screen.height + 100);
 }
 
 function draw() {
@@ -83,6 +99,8 @@ function draw() {
         player.update(config.players);
         player.draw();
     }
+
+    config.scoreboard.draw();
 }
 
 function keyPressed(event) {

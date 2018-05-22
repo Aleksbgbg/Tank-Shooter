@@ -1,5 +1,5 @@
 class Player extends SpriteEntity {
-    constructor(emoji, controls, onDestroy) {
+    constructor(name, emoji, controls, onDestroy) {
         super({
             position: createVector(500, 500),
             sprite: emoji,
@@ -7,6 +7,8 @@ class Player extends SpriteEntity {
             spriteSetup: sprite =>  sprite.setCollider("circle", 0, 0, 12),
             onDestroy
         });
+
+        this.name = name;
 
         config.groups.players.add(this.sprite);
 

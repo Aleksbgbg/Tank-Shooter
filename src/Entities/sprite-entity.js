@@ -1,5 +1,13 @@
 const spriteCache = { };
 
+function getSprite(name, setup) {
+    if (!spriteCache.hasOwnProperty(name)) {
+        spriteCache[name] = loadImage(`Images/${name}.png`, setup);
+    }
+
+    return spriteCache[name];
+}
+
 class SpriteEntity {
     constructor(parametersInput) {
         if (new.target === SpriteEntity) {
@@ -9,6 +17,7 @@ class SpriteEntity {
         const parameters = {
             position: createVector(0, 0),
             sprite: "",
+            sprites: [],
             imageSetup: image => { },
             spriteSetup: sprite => { },
             onDestroy: () => { }
@@ -20,12 +29,15 @@ class SpriteEntity {
             }
         }
 
-        if (!spriteCache.hasOwnProperty(parameters.sprite)) {
-            spriteCache[parameters.sprite] = loadImage(`Images/${parameters.sprite}.png`, parameters.imageSetup);
+        this.sprite = createSprite(parameters.position.x, parameters.position.y);
+        if (parameters.sprites.length === 0) {
+            this.sprite.addImage(getSprite(parameters.sprite, parameters.imageSetup));
+        } else {
+            for (const sprite of parameters.sprites) {
+                this.sprite.addImage(sprite, getSprite(sprite, parameters.imageSetup))
+            }
         }
 
-        this.sprite = createSprite(parameters.position.x, parameters.position.y);
-        this.sprite.addImage(spriteCache[parameters.sprite]);
         this.sprite.spriteEntity = this;
 
         parameters.spriteSetup(this.sprite);
