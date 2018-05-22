@@ -42,4 +42,11 @@ class Cannon extends SpriteEntity {
     rotate(magnitude) {
         this.rotation += 5 * magnitude;
     }
+
+    destroy() {
+        for (const bullet of this.bullets) {
+            bullet.destroy();
+        }
+        super.destroy();
+    }
 }

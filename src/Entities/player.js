@@ -55,4 +55,9 @@ class Player extends SpriteEntity {
             this.controls.shoot.action();
         }
     }
+
+    destroy() {
+        this.cannon.destroy();
+        super.destroy();
+    }
 }
