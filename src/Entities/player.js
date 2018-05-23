@@ -1,7 +1,9 @@
 class Player extends SpriteEntity {
     constructor(name, emoji, controls, onDestroy) {
+        const borderOffset = 5 * Tile.dimension;
+
         super({
-            position: createVector(500, 500),
+            position: createVector(random(borderOffset, config.screen.width - borderOffset), random(borderOffset, config.screen.height - borderOffset)),
             sprite: emoji,
             imageSetup: image => image.resize(25, 0),
             spriteSetup: sprite =>  sprite.setCollider("circle", 0, 0, 12),

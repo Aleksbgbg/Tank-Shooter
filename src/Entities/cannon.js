@@ -7,7 +7,7 @@ class Cannon extends SpriteEntity {
         });
 
         this.bullets = [];
-        this.rotation = 0;
+        this.rotation = random(0, 360);
     }
 
     get rotation() {
